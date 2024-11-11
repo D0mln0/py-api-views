@@ -6,16 +6,16 @@ from cinema.views import (
     GenreDetail,
     ActorList,
     ActorDetail,
-    CinemaViewSet,
+    CinemaHallViewSet,
     MovieViewSet
 )
 
 
-cinema_hall_list = CinemaViewSet.as_view(actions={
+cinema_hall_list = CinemaHallViewSet.as_view(actions={
     "get": "list",
     "post": "create"
 })
-cinema_hall_detail = CinemaViewSet.as_view(actions={
+cinema_hall_detail = CinemaHallViewSet.as_view(actions={
     "get": "retrieve",
     "put": "update",
     "patch": "partial_update",
@@ -26,14 +26,14 @@ router = routers.DefaultRouter()
 router.register("movies", MovieViewSet, basename="movies")
 
 urlpatterns = [
-    path("genre/", GenreList.as_view(), name="movie-list"),
-    path("genre/<int:pk>/", GenreDetail.as_view(), name="movie-detail"),
+    path("genres/", GenreList.as_view(), name="movie-list"),
+    path("genres/<int:pk>/", GenreDetail.as_view(), name="movie-detail"),
 
-    path("actor/", ActorList.as_view(), name="movie-list"),
-    path("actor/<int:pk>/", ActorDetail.as_view(), name="movie-detail"),
+    path("actors/", ActorList.as_view(), name="movie-list"),
+    path("actors/<int:pk>/", ActorDetail.as_view(), name="movie-detail"),
 
-    path("hall/", cinema_hall_list, name="cinema-list"),
-    path("hall/<int:pk>/", cinema_hall_detail, name="cinema-detail"),
+    path("cinema_halls/", cinema_hall_list, name="cinema-list"),
+    path("cinema_halls/<int:pk>/", cinema_hall_detail, name="cinema-detail"),
 
     path("", include(router.urls))
 ]
